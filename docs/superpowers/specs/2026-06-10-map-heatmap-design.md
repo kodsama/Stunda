@@ -133,6 +133,11 @@ Refinements made during implementation:
 - **Modern semi-transparent palette.** The colormap is built from public RGBA
   stops (amber → orange → red → magenta) with alpha ramping 0 → ~0.72, so the
   basemap streets stay visible through a translucent glow.
+- **Per-photo markers.** A crisp translucent dot is drawn at each photo on top
+  of the glow, so individual locations stay visible regardless of cluster
+  density (the glow alone, normalised to the busiest spot, hid sparse points
+  like a few airport shots). Overlapping dots in busy areas darken naturally.
+  Regression-tested via pixel inspection of an isolated point.
 - **Packaging.** The `map` extra also includes `geopy` (used for cluster names).
 
 New tested units: `haversine_km`, `cluster_coordinates`, `parse_cluster_selection`,
