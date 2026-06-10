@@ -143,3 +143,24 @@ Refinements made during implementation:
 New tested units: `haversine_km`, `cluster_coordinates`, `parse_cluster_selection`,
 `describe_location` (geopy mocked), `_fit_aspect`, and the CLI cluster-selection
 paths (flag, interactive, non-interactive, invalid).
+
+## Amendment 2026-06-10 — per-photo markers, auto-zoom, filename labels
+
+- **Per-photo markers.** A translucent dot is drawn at each photo on top of the
+  glow, so individual locations stay visible regardless of cluster density
+  (max-normalised glow alone hid sparse points like a few airport shots).
+  Regression-tested by pixel-inspecting an isolated point.
+- **Auto-zoom (overview + sub-area zooms).** `render_maps` always writes the
+  overview, and when photos span more than `_ZOOM_TRIGGER_KM` and fall into
+  multiple regions (`_cluster_indices` at `_ZOOM_REGION_KM`), it also writes one
+  zoomed-in PNG per region as `<stem>-zoom<N><suffix>`.
+- **Filename-range labels (`--map-names`).** Photos are grouped into spots
+  (`_cluster_indices` at `_LABEL_SPOT_KM`); each spot is labelled with its
+  collapsed filename range via `collapse_filenames` (consecutive numbers →
+  `PREFIX0001-0003`, gaps → `…, 0005`, distinct prefixes → `; `, truncated to a
+  max length). Filenames are carried alongside coordinates via `collect_located`
+  and `_cluster_indices` (index-based clustering keeps the two aligned through
+  cluster selection and zoom splitting).
+
+New tested units: `_cluster_indices`, `collapse_filenames`, `area_labels`,
+`render_maps` (overview-only vs. zoom split), and `render_heatmap(names=...)`.
