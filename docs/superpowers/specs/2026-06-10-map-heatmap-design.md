@@ -113,3 +113,28 @@ Project coverage gate is 95% (`--cov-fail-under=95`).
 
 Mock only externalities (the contextily tile fetch / network). Everything else —
 EXIF read/write, grid math, CLI parsing — runs against the real code.
+
+## Amendment 2026-06-10 — clustering, auto-zoom, modern glow
+
+Refinements made during implementation:
+
+- **Auto-zoom to fit all photos.** `render_heatmap` builds the window from the
+  padded bounding box of the selected coordinates, projects to Web Mercator,
+  fits it into an aspect range (widening the deficient axis only, never
+  squashing), sizes the figure to match, uses `set_aspect("equal")`, and
+  re-asserts the limits after the basemap + overlay are drawn. This keeps the
+  view tight on the actual photos (a city stays a city, not all of Europe).
+- **Multi-location clustering.** Photos are grouped into geographically distinct
+  clusters via single-linkage on haversine distance (`cluster_coordinates`,
+  threshold 50 km). When more than one cluster is found, the CLI lists them —
+  reverse-geocoded to place names via `geopy` (`describe_location`, best-effort)
+  — and resolves which to render from `--map-clusters` (`all` / `1,2`), an
+  interactive prompt on a TTY, or "include all" non-interactively.
+- **Modern semi-transparent palette.** The colormap is built from public RGBA
+  stops (amber → orange → red → magenta) with alpha ramping 0 → ~0.72, so the
+  basemap streets stay visible through a translucent glow.
+- **Packaging.** The `map` extra also includes `geopy` (used for cluster names).
+
+New tested units: `haversine_km`, `cluster_coordinates`, `parse_cluster_selection`,
+`describe_location` (geopy mocked), `_fit_aspect`, and the CLI cluster-selection
+paths (flag, interactive, non-interactive, invalid).
