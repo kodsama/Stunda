@@ -1,0 +1,8 @@
+{
+  "_comment": "Drop this into your MCP client config (e.g. Claude Desktop's claude_desktop_config.json, or a Claude Code .mcp.json). Build the binary first: dart compile exe packages/mcp/bin/stunda_mcp.dart -o stunda_mcp, then point 'command' at it.",
+  "mcpServers": {
+    "stunda": {
+      "command": "/absolute/path/to/stunda_mcp"
+    }
+  }
+}
