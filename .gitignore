@@ -19,8 +19,26 @@ coverage.xml
 venv/
 env/
 
-# Editor / IDE / tool config
+# AI assistant / coding-agent artifacts (never commit these)
 .claude/
+.cursor/
+.cursorrules
+.cursorignore
+.antigravity/
+.windsurf/
+.windsurfrules
+.continue/
+.aider*
+.codeium/
+.cody/
+.tabnine/
+.zed/
+.github/copilot-instructions.md
+.mcp.json
+GEMINI.md
+.gemini/
+
+# Editor / IDE / tool config
 .vscode/
 .idea/
 *.sublime-project
@@ -55,3 +73,6 @@ coverage/
 
 # Vendored exiftool (bundled at build time via tool/fetch-exiftool.sh)
 app/assets/exiftool/
+
+# Vendored ONNX Runtime lib + detector model (via tool/fetch-onnx.sh)
+app/assets/onnx/
