@@ -6,7 +6,7 @@ import 'mcp_server.dart';
 
 /// Serves [server] over stdio: newline-delimited JSON-RPC on stdin/stdout.
 ///
-/// This is the transport MCP clients (Claude Code/Desktop, Cursor, …) use when
+/// This is the transport MCP clients (Cursor, etc.) use when
 /// they spawn the server as a subprocess. Completes when [input] closes.
 ///
 /// [input] and [output] default to the process's [stdin]/[stdout]; they are

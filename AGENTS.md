@@ -2,8 +2,8 @@
 
 > **Two ways to drive this tool as an LLM:**
 > 1. **MCP server** (recommended) — a standard Model Context Protocol server, see
->    [MCP](#mcp-model-context-protocol) below. Best for Claude Code/Desktop,
->    Cursor, and any MCP client.
+>    [MCP](#mcp-model-context-protocol) below. Best for MCP clients (Cursor,
+>    etc.).
 > 2. **CLI JSON contract** — `--json` + `schema`, documented in the rest of this
 >    file. Best for shell scripts and ad-hoc automation.
 
@@ -99,7 +99,7 @@ block **and** a `structuredContent` object: `{ ok, summary, count, items[], logs
   port up to 8796) **whenever the app is open**; newline-delimited JSON-RPC. Run
   the binary the same way with `--tcp [--port N]`.
 
-**Client config (stdio), e.g. Claude Desktop / Claude Code:**
+**Client config (stdio):**
 
 ```json
 {
